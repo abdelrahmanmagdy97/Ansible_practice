@@ -1,0 +1,48 @@
+##Continue of Handler
+#All of this can be changed.
+#1)Run between tasks
+#2)Run more than once
+
+#If you called it so many times, it will run once. We want more than once and in its place..
+#All you need to do is…
+# after the task that have the notify of handler type:
+#meta: flush_handlers
+#
+#
+#It will run handler more than once and between tasks..code is below.
+#IMPORTANT NOTE: IF TASK IS THE LAST ONE YOU DO NOT NEED TO FLUSH HANDLERS. Code -->
+##TO SUM UP FLUSH HANDLERS ALLOWS YOU TO TRIGGER IT IMMEDIATELY
+---
+- hosts: prod
+  become: true
+  tasks:
+    - name: Create file1
+      file:
+        path: ~/abdo.txt
+        state: touch
+      notify: h1
+
+    - meta: flush_handlers
+
+    - name: Create file2
+      file:
+        path: ~/abdo2.txt
+        state: touch
+
+    - name: Create file3
+      file:
+        path: ~/tstfile
+        state: touch
+      notify: h1
+
+    - meta: flush_handlers
+
+    - name: Create file4
+      file:
+        path: ~/abdo.txt
+        state: touch
+
+  handlers:
+    - name: h1
+      command: echo "Hello there :)"
+

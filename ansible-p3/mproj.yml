@@ -1,0 +1,5 @@
+---
+- hosts: prod
+  roles:
+    - r1
+    - r2

@@ -1,0 +1,6 @@
+- hosts: prod
+  become: true
+  tasks:
+      - name: add group devs
+        group: name=devs state=present gid=1887
+

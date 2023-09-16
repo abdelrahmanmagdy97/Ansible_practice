@@ -1,0 +1,6 @@
+---
+- import_playbook: 1play.yaml
+- import_playbook: 2play.yaml
+- import_playbook: 3play.yaml
+- import_playbook: extraplay.yaml
+- import_playbook: extraplay2.yaml

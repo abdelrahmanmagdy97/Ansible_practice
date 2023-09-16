@@ -1,0 +1,39 @@
+---
+- hosts: prod
+  become: true
+  tasks:
+    - name: Update package cache
+      apt:
+        update_cache: yes
+
+    - name: Install Apache web service
+      apt:
+        name: apache2
+        state: present
+      notify: h1
+      ignore_errors: True
+
+    - name: Create file
+      file:
+        path: /tstfile
+        state: touch
+
+  handlers:
+    - name: h1
+      service:
+        name: apache2
+        state: started
+
+##Notes: If a task failed all other tasks fail,  by setting ignore_errors: True for a specific task, you are telling Ansible to continue 
+##running the playbook even if that particular task fails. In other words, Ansible will not stop the playbook execution when this task 
+##encounters an error.
+
+##But for the handler, the handler will not work if its task failed while there is ignore errors, as ignore error will keep other tasks
+##working but not the handler under the same task.
+
+##So, who did run fist ? task ,handler, task ?
+## handler was at last.. why ?
+##Default way of handler: run after all tasks and run once. If it task did work it will work , if not it will not. If they are many 
+##handlers.
+##Run once means that if you did assign handler 1 to task1 and task3 also. It will only run once as it was already notified with task1
+

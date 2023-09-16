@@ -1,0 +1,17 @@
+---
+- hosts: prod
+
+  tasks:
+    - name: create fileA
+      file: path=/tmp/abdo1.txt state=touch
+      notify: h1
+    - meta: flush_handlers
+
+    - name: create fileB
+      file: path=/tmp/abdo2.txt state=touch
+      notify: h2
+  handlers:
+    - name: h1
+      file: path=/tmp/h1.txt state=touch
+    - name: h2
+      file: path=/tmp/h2.txt state=touch

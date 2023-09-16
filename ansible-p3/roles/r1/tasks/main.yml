@@ -1,0 +1,5 @@
+---
+- name: create fileA
+  file: path={{ file_path }} state=touch
+  notify: h1
+- meta: flush_handlers

@@ -1,0 +1,5 @@
+---
+- name: create fileA
+  file: path=/tmp/abdo1.txt state=touch
+  notify: h1
+- meta: flush_handlers

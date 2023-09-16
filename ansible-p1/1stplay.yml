@@ -1,0 +1,22 @@
+---
+- hosts: prod
+  tasks:
+    - name: create 777 file
+      file:
+        path: ~/file1.txt
+        state: touch
+        mode: '0777'
+      notify: h1
+    - name: Delete file
+      file:
+        path: ~/file1.txt
+        state: absent
+        mode: '0777'
+
+  handlers:
+    - name: h1
+      file:
+        path: ~/h1.txt
+        state: touch
+        mode: '0666'
+

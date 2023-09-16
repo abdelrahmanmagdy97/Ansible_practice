@@ -1,0 +1,11 @@
+---
+- hosts: prod
+  become: true
+  tasks:
+    - name: add group admins
+      group:
+        name: admins
+        state: present
+        gid: 1889
+
+# become: true was added in play 1,2,3 as group module needs root priveleges

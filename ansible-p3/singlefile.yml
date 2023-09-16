@@ -1,0 +1,10 @@
+---
+- hosts: prod
+  vars:
+    - file_path: ~/fileX
+  roles:
+    - r1
+    - r2
+  tasks:
+    - name: create fileX
+      file: path={{ file_path }} state=touch
