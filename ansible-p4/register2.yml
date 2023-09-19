@@ -1,0 +1,41 @@
+---
+- hosts: prod 
+  gather_facts: no
+  become: true
+  vars:
+    - file_path: ~/abdo.txt
+  tasks:
+  #delete file first if exist
+  -  name: delete file 
+     file:  path={{file_path}} state=absent 
+     register: fileslist 
+
+  -  name: create file 
+     file:  path={{file_path}} state=touch 
+
+  -  name: file content 
+     shell: cat {{file_path}}
+     register: content    
+
+  -  name: print content 
+     debug: 
+      var: content.stdout
+
+  -  name: edit file content 
+     shell: echo "hi" > {{file_path}}
+     when: content.stdout == ""
+
+  -  name: Delete not empty file 
+     shell: rm -f {{file_path}}
+     when: content.stdout != ""
+
+  -  name: file content 
+     shell: cat {{file_path}}
+     register: newcontent    
+
+  -  name: print new content 
+     debug: 
+      var: newcontent.stdout
+#task a which creates an empty file, 
+#then check that empty file if it is empty or have a content, 
+#if there is content then delete it. If it is empty put inside it content.

@@ -1,0 +1,4 @@
+[prod]
+3.79.149.46 ansible_ssh_private_key_file=~/Documents/personal/ansible-p3/Personal-Jenkins-key.pem ansible_ssh_user=ubuntu
+[demo]
+127.0.0.1

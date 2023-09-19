@@ -1,0 +1,13 @@
+---
+- hosts: prod 
+  vars:
+    - file_path: /filex
+  tasks:
+  -  name: create file 
+     file:  path={{ item }}  state=touch 
+     loop:
+      - ~/file1
+      - ~/file2
+      - ~/file3
+      # Just used loop keyword instead of with_item
+      

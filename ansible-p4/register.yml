@@ -1,0 +1,31 @@
+---
+- hosts: prod 
+  gather_facts: no
+  become: true
+  vars:
+    - file_path: /filex
+  tasks:
+  -  name: list file 
+     shell:  ls /root 
+     register: fileslist 
+  -  name: print filelist 
+     debug:   
+      var: fileslist    
+# Used to define variable from inside a task,
+# Task done and it has an output, I want to take that output and declare it in a variable.
+
+#It will take the output of the ls and save it in a variable called filelist.
+#Where is the output ??
+# We can add it in the debug for example 🙂
+#It outputs the full task not only output of ls only as in below
+
+#What if i want to print only after stdout_lines line in the output above.
+#Change debug module to be:
+#name: print filelist
+#debug:
+#var: filelist.stdout_lines
+#If you want to mix text with var then the var line will be as follow
+#
+#name: print filelist
+#debug:
+#var: “Files are {{ filelist.stdout_lines }}”

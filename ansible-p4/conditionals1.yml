@@ -1,0 +1,19 @@
+---
+- hosts: prod 
+  gather_facts: no
+  vars:
+    - file_path: /filex
+  tasks:
+  -  name: create file 
+     file:  path={{ abdo }}  state=touch 
+     loop:
+      - ~/file1
+      - ~/file2
+      - ~/file3
+     loop_control:
+      loop_var: abdo  
+     when: x == "yes"     
+# Simply by adding the keyword when,Will pass x in command
+# you can put the variable under vars instead of passing it
+# remember that single = declares values
+# while == does check and verify the value (true,false)

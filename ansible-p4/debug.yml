@@ -1,0 +1,17 @@
+---
+- hosts: prod 
+  gather_facts: no
+  vars:
+    - name: "abdo"
+  tasks:
+  -  name: print msg with clear text
+     debug: 
+       msg: "hello"
+  -  name: print msg with vars
+     debug:  
+       var: name
+#It is a module same as previous modules, as a seperated task. It print messages while playbook is working. Massages are defined by you.
+#two types of messages
+#Clear text using msg
+#variable using var 
+#or text+variable

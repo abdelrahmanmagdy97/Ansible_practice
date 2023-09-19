@@ -1,0 +1,22 @@
+---
+- hosts: prod 
+  gather_facts: no
+  vars:
+    - file_path: /filex
+  tasks:
+  -  name: create file 
+     file:  path={{ abdo }}  state=touch 
+     loop:
+      - ~/file1
+      - ~/file2
+      - ~/file3
+     loop_control:
+      loop_var: abdo       
+#Note 1: Here I changed the default keyword
+#item to be abdo ;)
+
+#Note 2: gather data: no , to disable ansible
+#from getting from server it connects to.
+
+#gather facts is a task that runs by default
+#There is custom facts if you need custom data

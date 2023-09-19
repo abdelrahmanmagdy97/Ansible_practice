@@ -1,0 +1,4 @@
+---
+- name: create fileB
+  file: path=/tmp/abdo2.txt state=touch
+  notify: h2

@@ -1,0 +1,28 @@
+---
+- hosts: prod 
+  gather_facts: no
+  vars:
+    - file_path: /filex
+    - x: "yes"
+    - y: "no"
+  tasks:
+  -  name: create file 
+     file:  path={{ abdo }}  state=touch 
+     loop:
+      - ~/file1
+      - ~/file2
+      - ~/file3
+     loop_control:
+      loop_var: abdo  
+     when: x == "yes" and y == "no"
+#can also be written like this
+#     when: 
+#      - x == "yes" 
+#      - y == "no"
+
+# both of the same methods are the same
+
+#You can use gather facts with conditionals
+#example:
+# when: (ansible_facts['distribution'] == "Centos" 
+#and ansible_facts ['distribution_major_ve rsion'] == "g") or (ansible_facts ['distribution_file_variety'] == "RedHat" )
